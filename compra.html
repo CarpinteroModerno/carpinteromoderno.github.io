@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <title>Carrito de compras</title>
+    <link rel="icon" href="Imagenes/230310_SitioCM_Logo.png">
+    <link rel="stylesheet" href="Diseños\diseñoHome.css">
+    <link rel="stylesheet" href="Diseños/compra.css">
+    <script src="JS/login.js"></script>
+</head>
+
+<body onload="actualizar_normal();">
+    <header>
+        <div class="navbar">
+            <div class="logo"><a href="index.html"><img src="Imagenes/230310_SitioCM_LogoLetras.png"
+                        alt="Logo de la empresa" width="144.75px" height="56.5px"></a></div>
+            <ul class="links">
+                <li>
+                    <a href="#" ondblclick="dobleClic();">Productos</a>
+                    <ul class="submenu">
+                        <li><a href="Catalogo/productos_basicos.html">Máquinas</a></li>
+                        <li><a href="Catalogo/productos_inalambricos.html">Inalámbricos</a></li>
+                        <li><a href="Catalogo/productos_manuales.html">Herramientas Manuales</a></li>
+                    </ul>
+                </li>
+                <li><a href="Catalogo/ofertas.html">Ofertas</a></li>
+                <li>
+                    <a href="#">Nosotros</a>
+                    <ul class="submenu">
+                        <li><a href="home.html">¿Quiénes somos?</a></li>
+                        <li><a href="historia.html">Historia</a></li>
+                    </ul>
+                </li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <a href="login.html" class="registro-btn" id="registro">Registrarse</a>
+            <a href="index.html" class="cerrar-sesion" id="cerrar" onclick="salir();"><i
+                    class="fa-solid fa-door-open"></i>Salir</a>
+            <div class="alternar_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <script>
+            function dobleClic() {
+                window.location.href = './index.html'
+            }
+        </script>
+
+        <div class="mostrar_menu">
+            <ul class="menu">
+                <li>
+                    <a class="m_links mas" href="#">Productos<span><i class="icono fa fa-chevron-down"
+                                aria-hidden="true"></i></span></a>
+                    <ul class="submenu_2">
+                        <li><a href="Catalogo/productos_basicos.html">Máquinas</a></li>
+                        <li><a href="Catalogo/productos_inalambricos.html">Inalámbricos</a></li>
+                        <li><a href="Catalogo/productos_manuales.html">Manuales</a></li>
+                    </ul>
+                </li>
+                <li><a class="m_links" href="Catalogo/ofertas.html">Ofertas</a></li>
+                <li>
+                    <a class="m_links mas" href="#">Nosotros<span><i class="icono fa fa-chevron-down"
+                                aria-hidden="true"></i></span></a>
+                    <ul class="submenu_2">
+                        <li><a href="home.html">¿Quiénes somos?</a></li>
+                        <li><a href="historia.html">Historia</a></li>
+                    </ul>
+                </li>
+                <li><a href="contacto.html" class="m_links">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <script>
+        const alternarBtn = document.querySelector('.alternar_btn')
+        const alternarBtnIcon = document.querySelector('.alternar_btn i')
+        const mostrarMenu = document.querySelector('.mostrar_menu')
+
+        alternarBtn.onclick = function () {
+            mostrarMenu.classList.toggle('open')
+            const isOpen = mostrarMenu.classList.contains('open')
+
+            alternarBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'
+        }
+    </script>
+
+    <div class="cuerpo">
+        <h1>SUS COMPRAS</h1>
+        <div class="compra">
+            <form id="procesar-pago" action="" autocomplete="off" method="post">
+                <div class="compra-inputs">
+                    <div>
+                        <label for="nombre">Nombre completo:</label>
+                        <input type="text" name="destinatario" class="campo" id="nombre"
+                            placeholder="Ingrese su nombre completo">
+                    </div>
+
+                    <div>
+                        <label for="email">Correo electrónico:</label>
+                        <input type="email" name="cc_to" class="campo" id="email"
+                            placeholder="Ingrese su correo electrónico">
+                    </div>
+
+                    <div>
+                        <label for="adress">Dirección personal:</label>
+                        <input type="text" name="adress" id="adress" placeholder="Ingrese su dirección" class="campo">
+                    </div>
+                </div>
+
+                <div id="carrito" class="tabla-responsive">
+                    <table class="table" id="lista-compra">
+                        <thead>
+                            <tr>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Subtotal</th>
+                                <th scope="col">Eliminar</th>
+                            </tr>
+                        </thead>
+
+                        <tbody></tbody>
+
+                        <tr>
+                            <th class="text-right" colspan="4" scope="col">SUBTOTAL:</th>
+                            <th scope="col">
+                                <p id="subtotal"></p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="text-right" colspan="4" scope="col">IVA (16%): </th>
+                            <th scope="col">
+                                <p id="IVA"></p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="text-right total" colspan="4" scope="col">TOTAL:</th>
+                            <th scope="col">
+                                <p class="total" id="total"></p>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="botones">
+                    <a href="index.html" class="volverBtn">Volver</a>
+                    <a href="#" class="compraBtn" id="procesar-compra">Realizar compra</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="pie_pagina">
+        <div class="grupo1">
+            <div class="box">
+                <figure><a href="index.html"><img src="Imagenes/230310_SitioCM_LogoLetras.png"
+                            alt="Logo de Carpintero Moderno"></a></figure>
+            </div>
+            <div class="box b_posicion">
+                <h2>SUCURSALES</h2>
+                <p>Central Norte No. 1845 Esq. Libramiento Norte, La Llave, 29037 Tuxtla Gutiérrez, Chiapas</p><br>
+                <p>Avenida Quinta Norte Poniente 1615, 29000 Tuxtla Gutiérrez, Chiapas</p>
+            </div>
+            <div class="box b_posicion">
+                <h2>PRODUCTOS</h2>
+                <ul>
+                    <li><a href="Catalogo/productos_basicos.html">Máquinas</a></li>
+                    <li><a href="Catalogo/productos_inalambricos.html">Inalámbricos</a></li>
+                    <li><a href="Catalogo/productos_manuales.html">Manuales</a></li>
+                    <li><a href="Catalogo/ofertas.html">Ofertas</a></li>
+                </ul>
+            </div>
+            <div class="box">
+                <h2>ACERCA DE</h2>
+                <ul>
+                    <li><a href="home.html">Nosotros</a></li>
+                    <li><a href="historia.html">Historia</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="grupo2">
+            <small>&copy; 2023 <b>Carpintero Moderno</b> - Todos los Derechos Reservados.</small>
+        </div>
+    </footer>
+    <script src="JS/carrito.js"></script>
+    <script src="JS/compra.js"></script>
+    <script>
+        let listElements = document.querySelectorAll('.mas');
+        listElements.forEach(listElement => {
+            listElement.addEventListener('click', () => {
+                listElement.classList.toggle('ver');
+                let height = 0;
+                let menu = listElement.nextElementSibling;
+                if (menu.clientHeight == "0") {
+                    height = menu.scrollHeight;
+                }
+                menu.style.height = height + "px";
+            })
+        });
+    </script>
+</body>
+
+</html>

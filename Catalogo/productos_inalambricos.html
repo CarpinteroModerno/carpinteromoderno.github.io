@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../Diseños/carrito.css">
+	<title>Catálogo de productos</title>
+    <link rel="icon" href="../Imagenes/230310_SitioCM_Logo.png">
+    <link rel="stylesheet" href="../Diseños/diseñoHome.css">
+	<script src="../JS/login.js"></script>
+</head>
+<body onload="actualizar();">
+    <header>
+		<div class="navbar">
+			<div class="logo"><a href="../index.html"><img src="../Imagenes/230310_SitioCM_LogoLetras.png" alt="Logo de la empresa" width="144.75px" height="56.5px"></a></div>
+			<ul class="links">
+				<li>
+					<a href="#" ondblclick="dobleClic();">Productos</a>
+					<ul class="submenu">
+						<li><a href="productos_basicos.html">Máquinas</a></li>
+						<li><a href="productos_inalambricos.html">Inalámbricos</a></li>
+						<li><a href="productos_manuales.html">Herramientas Manuales</a></li>
+					</ul>
+				</li>
+				<li><a href="ofertas.html">Ofertas</a></li>
+				<li>
+					<a href="#">Nosotros</a>
+					<ul class="submenu">
+						<li><a href="../home.html">¿Quiénes somos?</a></li>
+						<li><a href="../historia.html">Historia</a></li>
+					</ul>
+				</li>
+				<li><a href="../contacto.html">Contacto</a></li>
+			</ul>	
+			<a href="../login.html" class="registro-btn" id="registro">Registrarse</a>
+            <a href="../index.html" class="cerrar-sesion" id="cerrar" onclick="salir();"><i class="fa-solid fa-door-open"></i>Salir</a>
+            <a href="#" class="accion_btn carrito mas"><i class="fa-solid fa-shopping-cart"></i>Carrito<i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></a>
+			<div class="submenu-carrito" id="carrito">
+				<table id="lista-carrito" class="table">
+					<div class="header_carrito">
+						<h3>PRODUCTOS</h3>
+					</div>
+					<thead>
+						<tr>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Precio</th>
+							<th>Borrar</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<div class="opciones">
+					<a href="#" id="vaciar-carrito" class="vaciar">Vaciar carrito</a>
+					<a href="#" id="procesar-pedido" class="pagar">Procesar pedido</a>
+				</div>
+			</div>
+			<div class="alternar_btn">
+				<i class="fa-solid fa-bars"></i>
+			</div>
+		</div>		
+		<script>
+			function dobleClic(){
+				window.location.href = '../index.html'
+			}
+		</script>
+
+		<div class="mostrar_menu">
+			<ul class="menu">
+				<li>
+					<a class="m_links mas" href="#">Productos<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></a>
+					<ul class="submenu_2">
+						<li><a href="productos_basicos.html">Máquinas</a></li>
+						<li><a href="productos_inalambricos.html">Inalámbricos</a></li>
+						<li><a href="productos_manuales.html">Manuales</a></li>
+					</ul>
+				</li>
+				<li><a class="m_links" href="ofertas.html">Ofertas</a></li>
+				<li>
+					<a class="m_links mas" href="#">Nosotros<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></a>
+					<ul class="submenu_2">
+						<li><a href="../home.html">¿Quiénes somos?</a></li>
+						<li><a href="../historia.html">Historia</a></li>
+					</ul>
+				</li>
+				<li><a href="../contacto.html" class="m_links">Contacto</a></li>
+				<li><a href="../compra.html" class="accion_btn carrito mas"><i class="fa-solid fa-shopping-cart"></i>Carrito</a></li>
+			</ul>
+		</div>	
+		</header>
+	
+		<script>
+			const alternarBtn=document.querySelector('.alternar_btn')
+			const alternarBtnIcon=document.querySelector('.alternar_btn i')
+			const mostrarMenu=document.querySelector('.mostrar_menu')
+	
+			alternarBtn.onclick = function(){
+				mostrarMenu.classList.toggle('open')
+				const isOpen = mostrarMenu.classList.contains('open')
+				
+				alternarBtnIcon.classList = isOpen
+					?'fa-solid fa-xmark'
+					:'fa-solid fa-bars'
+			}
+		</script>
+
+		<h1 class="h_product">INALAMBRICOS</h1>
+        <div class="cuerpo c_productos" id="lista-productos">
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img src="../Imagenes\C2_Inalambricos\Clavadora Inalambrica 18V Metabo.jpg" alt="Clavadora inalambrica">
+						<h3>Clavadora Inalambrica 18V Metabo</h3>
+						<p class="precio">$ <span id="number1">5200.00</span></p>
+						<a href="#" class="accion_btn agregar" data-id="11">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>Motor sin escobillas para un mayor tiempo de funcionamiento, menos mantenimiento y mayor durabilidad.
+								Funciona con una batería de iones de litio compacta de 3 Ah que es más corta de 1,9 cm y un peso más ligero que una batería convencional de 3 Ah para una portabilidad completa.
+								Sin complicadas mangueras de aire y compresor ahorra tiempo en la configuración, durante las aplicaciones y en el lugar de trabajo limpio.
+								Sistema de resorte de aire único (similar a Metabo HPT línea neumática) que utiliza aire comprimido para conducir cada uña lo que resulta en un tiempo cero de rampa.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img class="inal_2" src="../Imagenes\C2_Inalambricos\Fresadora Inalambrica Dewalt.jpg" alt="Fresadora inalambrica">
+						<h3>Róuter Inalambrico Dewalt 20v</h3>
+						<p class="precio">$ <span id="number2">3800.00</span></p>
+						<a href="#" class="accion_btn agregar" data-id="12">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>El enrutador compacto sin escobillas DEWALT DCW600B de 20 voltios MAX XR de iones de litio proporciona energía como un enrutador compacto con cable al tiempo que proporciona la comodidad de una herramienta inalámbrica. La base fija de plástico y las luces LED duales ayudan a iluminar la superficie de trabajo y proporcionan una visibilidad superior de la broca. Este router inalámbrico está equipado con control de velocidad variable para una velocidad de bits óptima en cada aplicación. La abrazadera de liberación permite un cambio rápido y fácil de broca y base.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img src="../Imagenes\C2_Inalambricos\Rotomartillo Taladro Percutor Inalambrico Dewalt.jpg" alt="Rotomartillo">
+						<h3>Rotomartillo Taladro Percutor Inalambrico Dewalt 20v</h3>
+						<p class="precio">$ <span id="number3">3500.00</span></p>
+						<a href="#" class="accion_btn agregar" data-id="13">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>Es el taladro rotomartillo mas fuerte del mercado. Cuenta con un siseño compacto y liviano se adapta a espacios reducidos.
+								Incluye 2 baterias. 
+								Transmisión de alta velocidad ofrece 2 velocidades (0-600 y 0-2.000 rpm) para una amplia gama de aplicaciones de fijación y perforación
+								Mango ergonómico ofrece comodidad y control
+								Chuck rapido de 1 / 2 "de trinquete mandril con plaquitas de metal duro ofrece una resistencia poco agarre superior
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img src="../Imagenes\C2_Inalambricos\Sierra Caladora Inalambrica M18 Milwaukee.jpg" alt="Sierra caladora">
+						<h3>SIERRA CALADORA INALÁMBRICA 18V</h3>
+						<p class="precio">$ <span id="number4">4600.00</span></p>
+						<a href="#" class="accion_btn agregar" data-id="14">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>Sierra caladora M18 Fuel Milwaukee, brinda cortes de calidad en una amplia variedad de materiales y su iluminación led permite mayor visibilidad en el área de trabajo. Cuenta con motor sin escobillas powerstate que ofrece una potencia de hasta 3,500 golpes por minuto con 18v, inteligencia redlink plus que protege contra sobrecargas. Utiliza una batería m18 redlithium xc5.0 (no incluida) que proporciona hasta 3200.4 cm lineales (105 pies) de corte en tableros de partículas laminado de 3/4 de pulgada. <br> El empaque contiene protector antiastillas, tubo de recolección de polvo, cubierta antipolvo, segueta de uso general, llave hexagonal y protector. Sus dimensiones son 27 x 23.11 x 10.16 cm.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img src="../Imagenes\C2_Inalambricos\Taladro atornillador inalambrico Bosch GSR-180-LI.jpg" alt="Atornillador">
+						<h3>Taladro Atornillador Inalambrico Bosch GSR-180</h3>
+						<p class="precio">$ <span id="number5">3150.00</span></p>
+						<a href="#" class="accion_btn agregar" data-id="15">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>El GSR-180 Professional de Bosch es el atornillador a batería más ligero en la categoría de 18v de Bosch. Su peso permite un manejo óptimo y un equilibrio perfecto entre comodidad y potencia. Este atornillador a batería es más potente y robusto, cuenta con caja de engranajes de 2 velocidades que ofrece un rendimiento profesional con un torque de 21/54 nm para atornillar lo que necesites, una capacidad mín./máx. de sujeción del portabrocas de 1.5 / 13 mm, sistema auto lock para el rápido cambio de accesorios y luz led para iluminar el área de trabajo. Además tiene velocidad variable y protección electrónica de las celdas de la batería para una vida más duradera.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+        </div>
+
+        <footer class="pie_pagina">
+            <div class="grupo1">
+                <div class="box">
+                    <figure><a href="../index.html"><img src="../Imagenes/230310_SitioCM_LogoLetras.png" alt="Logo de Carpintero Moderno"></a></figure>
+                </div>
+                <div class="box b_posicion">
+                    <h2>SUCURSALES</h2>
+                    <p>Central Norte No. 1845 Esq. Libramiento Norte, La Llave, 29037 Tuxtla Gutiérrez, Chiapas</p><br>
+                    <p>Avenida Quinta Norte Poniente 1615, 29000 Tuxtla Gutiérrez, Chiapas</p>
+                </div>
+                <div class="box b_posicion">
+                    <h2>PRODUCTOS</h2>
+                    <ul>
+                        <li><a href="productos_basicos.html">Máquinas</a></li>
+                        <li><a href="productos_inalambricos.html">Inalámbricos</a></li>
+                        <li><a href="productos_manuales.html">Manuales</a></li>
+                        <li><a href="ofertas.html">Ofertas</a></li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h2>ACERCA DE</h2>
+                    <ul>
+                        <li><a href="../home.html">Nosotros</a></li>
+                        <li><a href="../historia.html">Historia</a></li>
+                        <li><a href="../contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grupo2">
+                <small>&copy; 2023 <b>Carpintero Moderno</b> - Todos los Derechos Reservados.</small>
+            </div>
+        </footer>
+	<script src="../JS/carrito.js"></script>
+	<script src="../JS/pedido.js"></script>
+	<script>
+		let listElements = document.querySelectorAll('.mas');
+		listElements.forEach(listElement => {
+			listElement.addEventListener('click', ()=>{
+				listElement.classList.toggle('ver');	
+				let height = 0;
+				let menu = listElement.nextElementSibling;
+				if(menu.clientHeight == "0"){
+					height = menu.scrollHeight;
+				}
+				menu.style.height = height+"px";	
+			})
+		});
+	</script>
+</body>
+</html>

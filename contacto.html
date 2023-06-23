@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Contacto</title>
+    <link rel="icon" href="Imagenes/230310_SitioCM_Logo.png">
+    <link rel="stylesheet" href="Diseños\diseñoHome.css">
+    <link rel="stylesheet" href="Diseños/contacto.css">
+    <script src="JS/login.js"></script>
+</head>
+
+<body onload="actualizar_normal();">
+    <header>
+        <div class="navbar">
+            <div class="logo"><a href="index.html"><img src="Imagenes/230310_SitioCM_LogoLetras.png"
+                        alt="Logo de la empresa" width="144.75px" height="56.5px"></a></div>
+            <ul class="links">
+                <li>
+                    <a href="#" ondblclick="dobleClic();">Productos</a>
+                    <ul class="submenu">
+                        <li><a href="Catalogo/productos_basicos.html">Máquinas</a></li>
+                        <li><a href="Catalogo/productos_inalambricos.html">Inalámbricos</a></li>
+                        <li><a href="Catalogo/productos_manuales.html">Herramientas Manuales</a></li>
+                    </ul>
+                </li>
+                <li><a href="Catalogo/ofertas.html">Ofertas</a></li>
+                <li>
+                    <a href="#">Nosotros</a>
+                    <ul class="submenu">
+                        <li><a href="home.html">¿Quiénes somos?</a></li>
+                        <li><a href="historia.html">Historia</a></li>
+                    </ul>
+                </li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <a href="login.html" class="registro-btn" id="registro">Registrarse</a>
+            <a href="index.html" class="cerrar-sesion" id="cerrar" onclick="salir();"><i
+                    class="fa-solid fa-door-open"></i>Salir</a>
+            <a href="compra.html" class="accion_btn carrito mas"><i class="fa-solid fa-shopping-cart"></i>Carrito</a>
+            <div class="alternar_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+		<script>
+			function dobleClic(){
+				window.location.href = './index.html'
+			}
+		</script>
+        
+        <div class="mostrar_menu">
+            <ul class="menu">
+                <li>
+                    <a class="m_links mas" href="#">Productos<span><i class="icono fa fa-chevron-down"
+                                aria-hidden="true"></i></span></a>
+                    <ul class="submenu_2">
+                        <li><a href="Catalogo/productos_basicos.html">Máquinas</a></li>
+                        <li><a href="Catalogo/productos_inalambricos.html">Inalámbricos</a></li>
+                        <li><a href="Catalogo/productos_manuales.html">Manuales</a></li>
+                    </ul>
+                </li>
+                <li><a class="m_links" href="Catalogo/ofertas.html">Ofertas</a></li>
+                <li>
+                    <a class="m_links mas" href="#">Nosotros<span><i class="icono fa fa-chevron-down"
+                                aria-hidden="true"></i></span></a>
+                    <ul class="submenu_2">
+                        <li><a href="home.html">¿Quiénes somos?</a></li>
+                        <li><a href="historia.html">Historia</a></li>
+                    </ul>
+                </li>
+                <li><a href="contacto.html" class="m_links">Contacto</a></li>
+                <li><a href="compra.html" class="accion_btn carrito mas"><i
+                            class="fa-solid fa-shopping-cart"></i>Carrito</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <script>
+        const alternarBtn = document.querySelector('.alternar_btn')
+        const alternarBtnIcon = document.querySelector('.alternar_btn i')
+        const mostrarMenu = document.querySelector('.mostrar_menu')
+
+        alternarBtn.onclick = function () {
+            mostrarMenu.classList.toggle('open')
+            const isOpen = mostrarMenu.classList.contains('open')
+
+            alternarBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'
+        }
+    </script>
+    <script>
+        let listElements = document.querySelectorAll('.mas');
+        listElements.forEach(listElement => {
+            listElement.addEventListener('click', () => {
+                listElement.classList.toggle('ver');
+
+                let height = 0;
+                let menu = listElement.nextElementSibling;
+                if (menu.clientHeight == "0") {
+                    height = menu.scrollHeight;
+                }
+                menu.style.height = height + "px";
+
+            })
+        });
+    </script>
+
+    <div class="cuerpo">
+        <div class="c-form">
+            <div class="info">
+                <h1>CONTÁCTENOS</h1>
+                <p>¿Tiene alguna pregunta, sugerencia o queja sobre nuestros productos o servicios? ¿Quiere solicitar
+                    un presupuesto o hacer un pedido? ¿Necesita asesoramiento técnico o soporte postventa? No dude en
+                    contactarnos por cualquiera de los medios que le ofrecemos a continuación. Estaremos encantados de
+                    atenderle y resolver sus dudas o necesidades. <br><br>También puede visitarnos en nuestra tienda física y recibir una atención personalizada. Estamos a su servicio de lunes a viernes de 9:00 a 18:00 horas.
+                </p>
+                <a href="tel:961-204-0071"><i class="fa fa-phone"></i>961-204-0071</a>
+                <a href="mailto:carpinteromoderno69@gmail.com"><i
+                        class="fa fa-envelope"></i>carpinteromoderno69@gmail.com</a>
+            </div>
+            <div class="form">
+                <form action="https://formsubmit.co/carpinteromoderno69@gmail.com" method="POST"" autocomplete=" off">
+                    <input type="text" name="name" placeholder="Nombre" class="campo" id="nombre" required>
+                    <input type="email" name="email" placeholder="Correo electrónico" class="campo" id="email" required>
+                    <textarea name="message" placeholder="Mensaje" id="message" required></textarea>
+                    <input type="submit" name="enviar" value="Enviar mensaje" class="btn-enviar">
+                    <input type="hidden" name="_next" value="http://127.0.0.1:5500/contacto.html">
+                    <input type="hidden" name="_captcha" value="false">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pie_pagina">
+        <div class="grupo1">
+            <div class="box">
+                <figure><a href="index.html"><img src="Imagenes/230310_SitioCM_LogoLetras.png"
+                            alt="Logo de Carpintero Moderno"></a></figure>
+            </div>
+            <div class="box b_posicion">
+                <h2>SUCURSALES</h2>
+                <p>Central Norte No. 1845 Esq. Libramiento Norte, La Llave, 29037 Tuxtla Gutiérrez, Chiapas</p><br>
+                <p>Avenida Quinta Norte Poniente 1615, 29000 Tuxtla Gutiérrez, Chiapas</p>
+            </div>
+            <div class="box b_posicion">
+                <h2>PRODUCTOS</h2>
+                <ul>
+                    <li><a href="Catalogo/productos_basicos.html">Máquinas</a></li>
+                    <li><a href="Catalogo/productos_inalambricos.html">Inalámbricos</a></li>
+                    <li><a href="Catalogo/productos_manuales.html">Manuales</a></li>
+                    <li><a href="Catalogo/ofertas.html">Ofertas</a></li>
+                </ul>
+            </div>
+            <div class="box">
+                <h2>ACERCA DE</h2>
+                <ul>
+                    <li><a href="home.html">Nosotros</a></li>
+                    <li><a href="historia.html">Historia</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="grupo2">
+            <small>&copy; 2023 <b>Carpintero Moderno</b> - Todos los Derechos Reservados.</small>
+        </div>
+    </footer>
+</body>
+
+</html>

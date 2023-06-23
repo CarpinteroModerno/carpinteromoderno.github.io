@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+	<title>Ofertas</title>
+    <link rel="icon" href="../Imagenes/230310_SitioCM_Logo.png">
+    <link rel="stylesheet" href="../Diseños\diseñoHome.css">
+	<link rel="stylesheet" href="../Diseños/carrito.css">
+	<script src="../JS/login.js"></script>
+</head>
+<body onload="actualizar();">
+    <header>
+		<div class="navbar">
+			<div class="logo"><a href="../index.html"><img src="../Imagenes/230310_SitioCM_LogoLetras.png" alt="Logo de la empresa" width="144.75px" height="56.5px"></a></div>
+			<ul class="links">
+				<li>
+					<a href="#" ondblclick="dobleClic();">Productos</a>
+					<ul class="submenu">
+						<li><a href="productos_basicos.html">Máquinas</a></li>
+						<li><a href="productos_inalambricos.html">Inalámbricos</a></li>
+						<li><a href="productos_manuales.html">Herramientas Manuales</a></li>
+					</ul>
+				</li>
+				<li><a href="ofertas.html">Ofertas</a></li>
+				<li>
+					<a href="#">Nosotros</a>
+					<ul class="submenu">
+						<li><a href="../home.html">¿Quiénes somos?</a></li>
+						<li><a href="../historia.html">Historia</a></li>
+					</ul>
+				</li>
+				<li><a href="../contacto.html">Contacto</a></li>
+			</ul>	
+			<a href="../login.html" class="registro-btn" id="registro">Registrarse</a>
+            <a href="../index.html" class="cerrar-sesion" id="cerrar" onclick="salir();"><i class="fa-solid fa-door-open"></i>Salir</a>
+            <a href="#" class="accion_btn carrito mas"><i class="fa-solid fa-shopping-cart"></i>Carrito<i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></a>
+			<div class="submenu-carrito" id="carrito">
+				<table id="lista-carrito" class="table">
+					<div class="header_carrito">
+						<h3>PRODUCTOS</h3>
+					</div>
+					<thead>
+						<tr>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Precio</th>
+							<th>Borrar</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<div class="opciones">
+					<a href="#" id="vaciar-carrito" class="vaciar">Vaciar carrito</a>
+					<a href="#" id="procesar-pedido" class="pagar">Procesar pedido</a>
+				</div>
+			</div>
+			<div class="alternar_btn">
+				<i class="fa-solid fa-bars"></i>
+			</div>
+		</div>
+		<script>
+			function dobleClic(){
+				window.location.href = '../index.html'
+			}
+		</script>
+		
+		<div class="mostrar_menu">
+			<ul class="menu">
+				<li>
+					<a class="m_links mas" href="#">Productos<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></a>
+					<ul class="submenu_2">
+						<li><a href="productos_basicos.html">Máquinas</a></li>
+						<li><a href="productos_inalambricos.html">Inalámbricos</a></li>
+						<li><a href="productos_manuales.html">Manuales</a></li>
+					</ul>
+				</li>
+				<li><a class="m_links" href="ofertas.html">Ofertas</a></li>
+				<li>
+					<a class="m_links mas" href="#">Nosotros<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></a>
+					<ul class="submenu_2">
+						<li><a href="../home.html">¿Quiénes somos?</a></li>
+						<li><a href="../historia.html">Historia</a></li>
+					</ul>
+				</li>
+				<li><a href="../contacto.html" class="m_links">Contacto</a></li>
+				<li><a href="../compra.html" class="accion_btn carrito mas"><i class="fa-solid fa-shopping-cart"></i>Carrito</a></li>
+			</ul>
+		</div>	
+	</header>
+	
+		<script>
+			const alternarBtn=document.querySelector('.alternar_btn')
+			const alternarBtnIcon=document.querySelector('.alternar_btn i')
+			const mostrarMenu=document.querySelector('.mostrar_menu')
+	
+			alternarBtn.onclick = function(){
+				mostrarMenu.classList.toggle('open')
+				const isOpen = mostrarMenu.classList.contains('open')
+				
+				alternarBtnIcon.classList = isOpen
+					?'fa-solid fa-xmark'
+					:'fa-solid fa-bars'
+			}
+		</script>
+
+		<h1 class="h_product">OFERTAS</h1>
+        <div class="cuerpo c_productos" id="lista-productos">
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img src="../Imagenes/Ofertas/Cinta_5m.jpg" alt="Cinta métrica de 5m Stanley">
+						<h3>Flexómetro/Cinta métrica de 5m Stanley</h3>
+						<p class="precio">$ <span id="number1">120.00</span></p>
+						<p class="precio_ant"><s>$ 200.00</s></p>
+						<a href="#" class="accion_btn agregar" data-id="6">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>Cuenta con recubrimiento mate antirreflejo que facilita la lectura de las medidas que realices, 
+									y con resistente tecnología de cierre de compresión que evita impactos al momento de guardarlo. 
+									Cuenta con ABS ergonómico de alto impacto y la funda de goma le dará mayor resistencia y duración. 
+									Su botón de seguridad te permite fijar la cinta para no perder la medición y sus divisiones en 
+									pulgadas y centímetros te dan la posibilidad de comparar medidas al hacer conversiones.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img src="../Imagenes/Ofertas/Disco-sierra.jpg" alt="Disco de sierra para madera de 10 pulgadas Avanti">
+						<h3>Disco de sierra para madera de 10 pulgadas Avanti</h3>
+						<p class="precio">$ <span id="number2">180.00</span></p>
+						<p class="precio_ant"><s>$ 300.00</s></p>
+						<a href="#" class="accion_btn agregar" data-id="7">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>Está fabricado con puntas de carburo para poder hacer cortes sobre maderas 	      duras, suaves, 
+									tratadas con presión, contrachapas y vigas. Tiene 10 pulgadas de diámetro, un eje de 5/8 de 
+									pulgada y trabaja a una velocidad máxima de 6,000 revoluciones por minuto. Fabricada con 40 
+									dientes para un corte preciso. Es compatible con diversos tipos de sierras.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img src="../Imagenes/Ofertas/Escuadra.jpg" alt="Escuadra de 12 pulgadas Truper">
+						<h3>Escuadra de 12 pulgadas Truper</h3>
+						<p class="precio">$ <span id="number3">114.00</span></p>
+						<p class="precio_ant"><s>$ 190.00</s></p>
+						<a href="#" class="accion_btn agregar" data-id="8">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>Para medir, trazar y marcar ángulos de 45 o 90 grados sobre diferentes materiales. Cuenta con 
+									graduación en milímetros y pulgadas para un mayor rango de medidas, los números están grabados 
+									en láser para evitar que con el uso constante se desgasten, cuenta con mango de aluminio y 
+									plástico, materiales ligeros que facilitan su movilidad. Cuenta con un orificio en el extremo 
+									del mango para colgarlo.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img src="../Imagenes/Ofertas/Martillo.jpg" alt="Martillo de uña curva de 16 onzas Truper">
+						<h3>Martillo de uña curva de 16 onzas Truper</h3>
+						<p class="precio">$ <span id="number4">150.00</span></p>
+						<p class="precio_ant"><s>$ 250.00</s></p>
+						<a href="#" class="accion_btn agregar" data-id="9">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>Útil para trabajos de carpintería en el hogar o el taller. Cuenta con una cara totalmente 
+									pulida y mango de fibra de vidrio que reduce las vibraciones del golpe. Su diseño absorbe 
+									impactos y proporciona un rendimiento superior con menos vibración, óptimo para tareas con más 
+									solidez. Está elaborado de acero resistente y posee un alojamiento imantado para clavos. 
+									Sus dimensiones son 33.5 x 13 x 3 cm.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row center-xs">
+				<div class="col-xs-10 col-sm-6 col-md-4 product">
+					<div class="card">
+						<img src="../Imagenes/Ofertas/Pistola-gravedad.jpg" alt="Pistola para pintar de gravedad de 600 ml">
+						<h3>Pistola para pintar de gravedad de 600 ml</h3>
+						<p class="precio">$ <span id="number5">600.00</span></p>
+						<p class="precio_ant"><s>$ 1,000.00</s></p>
+						<a href="#" class="accion_btn agregar" data-id="10">Agregar al carrito</a>
+						<h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+						<ul class="submenu_2">
+							<li><p>Cuenta con un sistema LVMP que permite un ahorro máximo de pintura en cada aplicación, lo que 
+									la vuelve adecuada para uso en la rama automotriz o industrial. Tiene un diseño libre de 
+									empaques que facilita su limpieza, incrementando su vida y durabilidad, además, opera con una 
+									presión de trabajo de 36 PSI y consumo de aire de 10.6 CFM. Fabricada con un cuerpo de 
+									aluminio en una sola pieza, conformado con control de abanico, material y aire, vaso de 600 ml 
+									con empaque externo que evita derrames durante su operación, boquilla de 1.3 mm y entrada de 
+									aire de 1/4 de pulgada. El empaque incluye mini regulador profesional que estabiliza el flujo de 
+									aire.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+        </div>
+
+        <footer class="pie_pagina">
+			<div class="grupo1">
+				<div class="box">
+					<figure><a href="../index.html"><img src="../Imagenes/230310_SitioCM_LogoLetras.png" alt="Logo de Carpintero Moderno"></a></figure>
+				</div>
+				<div class="box b_posicion">
+					<h2>SUCURSALES</h2>
+					<p>Central Norte No. 1845 Esq. Libramiento Norte, La Llave, 29037 Tuxtla Gutiérrez, Chiapas</p><br>
+					<p>Avenida Quinta Norte Poniente 1615, 29000 Tuxtla Gutiérrez, Chiapas</p>
+				</div>
+				<div class="box b_posicion">
+					<h2>PRODUCTOS</h2>
+					<ul>
+						<li><a href="productos_basicos.html">Máquinas</a></li>
+						<li><a href="productos_inalambricos.html">Inalámbricos</a></li>
+						<li><a href="productos_manuales.html">Manuales</a></li>
+						<li><a href="ofertas.html">Ofertas</a></li>
+					</ul>
+				</div>
+				<div class="box">
+					<h2>ACERCA DE</h2>
+					<ul>
+						<li><a href="../home.html">Nosotros</a></li>
+						<li><a href="../historia.html">Historia</a></li>
+						<li><a href="../contacto.html">Contacto</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="grupo2">
+				<small>&copy; 2023 <b>Carpintero Moderno</b> - Todos los Derechos Reservados.</small>
+			</div>
+		</footer>
+	<script src="../JS/carrito.js"></script>
+	<script src="../JS/pedido.js"></script>
+	<script>
+		let listElements = document.querySelectorAll('.mas');
+		listElements.forEach(listElement => {
+			listElement.addEventListener('click', ()=>{
+				listElement.classList.toggle('ver');
+
+				let height = 0;
+				let menu = listElement.nextElementSibling;
+				if(menu.clientHeight == "0"){
+					height = menu.scrollHeight;
+				}
+				menu.style.height = height+"px";
+
+			})
+		});
+	</script>
+</body>
+</html>

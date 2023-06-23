@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Catálogo de productos</title>
+    <link rel="icon" href="Imagenes/230310_SitioCM_Logo.png">
+    <link rel="stylesheet" href="Diseños\diseñoHome.css">
+    <link rel="stylesheet" href="Diseños\diseñoProductos.css">
+    <script src="JS/login.js"></script>
+</head>
+
+<body onload="actualizarProductos();">
+    <header>
+        <div class="navbar">
+            <div class="logo"><a href="index.html"><img src="Imagenes/230310_SitioCM_LogoLetras.png"
+                        alt="Logo de la empresa" width="144.75px" height="56.5px"></a></div>
+            <ul class="links">
+                <li>
+                    <a href="#" ondblclick="dobleClic();">Productos</a>
+                    <ul class="submenu">
+                        <li><a href="Catalogo/productos_basicos.html">Máquinas</a></li>
+                        <li><a href="Catalogo/productos_inalambricos.html">Inalámbricos</a></li>
+                        <li><a href="Catalogo/productos_manuales.html">Herramientas Manuales</a></li>
+                    </ul>
+                </li>
+                <li><a href="Catalogo/ofertas.html">Ofertas</a></li>
+                <li>
+                    <a href="#">Nosotros</a>
+                    <ul class="submenu">
+                        <li><a href="home.html">¿Quiénes somos?</a></li>
+                        <li><a href="historia.html">Historia</a></li>
+                    </ul>
+                </li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <a href="login.html" class="registro-btn" id="registro">Registrarse</a>
+            <a href="index.html" class="cerrar-sesion" id="cerrar" onclick="salir();"><i
+                    class="fa-solid fa-door-open"></i>Salir</a>
+            <a href="compra.html" class="accion_btn carrito mas"><i class="fa-solid fa-shopping-cart"></i>Carrito</a>
+            <div class="submenu-carrito" id="carrito">
+				<table id="lista-carrito" class="table">
+					<div class="header_carrito">
+						<h3>PRODUCTOS</h3>
+					</div>
+					<thead>
+						<tr>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Precio</th>
+							<th>Borrar</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<div class="opciones">
+					<a href="#" id="vaciar-carrito" class="vaciar">Vaciar carrito</a>
+					<a href="#" id="procesar-pedido" class="pagar">Procesar pedido</a>
+				</div>
+			</div>
+            <div class="alternar_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+		<script>
+			function dobleClic(){
+				window.location.href = './index.html'
+			}
+		</script>
+
+        <div class="mostrar_menu">
+            <ul class="menu">
+                <li>
+                    <a class="m_links mas" href="#">Productos<span><i class="icono fa fa-chevron-down"
+                                aria-hidden="true"></i></span></a>
+                    <ul class="submenu_2">
+                        <li><a href="Catalogo/productos_basicos.html">Máquinas</a></li>
+                        <li><a href="Catalogo/productos_inalambricos.html">Inalámbricos</a></li>
+                        <li><a href="Catalogo/productos_manuales.html">Manuales</a></li>
+                    </ul>
+                </li>
+                <li><a class="m_links" href="Catalogo/ofertas.html">Ofertas</a></li>
+                <li>
+                    <a class="m_links mas" href="#">Nosotros<span><i class="icono fa fa-chevron-down"
+                                aria-hidden="true"></i></span></a>
+                    <ul class="submenu_2">
+                        <li><a href="home.html">¿Quiénes somos?</a></li>
+                        <li><a href="historia.html">Historia</a></li>
+                    </ul>
+                </li>
+                <li><a href="contacto.html" class="m_links">Contacto</a></li>
+                <li><a href="compra.html" class="accion_btn carrito mas"><i
+                            class="fa-solid fa-shopping-cart"></i>Carrito</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <script>
+        const alternarBtn = document.querySelector('.alternar_btn')
+        const alternarBtnIcon = document.querySelector('.alternar_btn i')
+        const mostrarMenu = document.querySelector('.mostrar_menu')
+
+        alternarBtn.onclick = function () {
+            mostrarMenu.classList.toggle('open')
+            const isOpen = mostrarMenu.classList.contains('open')
+
+            alternarBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'
+        }
+    </script>
+
+    <div class="cuerpo cuerpo_inicio">
+        <div class="img-slider">
+            <div class="slide active">
+                <a href="./Catalogo/ofertas.html"><img src="Imagenes/carrusel/car4.jpg" alt="Carrusel 1"></a>
+                <a href="./Catalogo/ofertas.html">
+                    <div class="info">
+                        <h2>¡Ofertas y descuentos increíbles en Herramientas Manuales!</h2>
+                        <p>Aproveche las increíbles ofertas y descuentos que le ofrecemos en Carpintero Moderno®. Productos seleccionados con hasta un <b style="font-size: 18.5px;">40% de descuento</b>. No deje pasar esta oportunidad y haga su pedido antes de agotar existencias.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="slide">
+                <img src="Imagenes/carrusel/car1.jpg" alt="Carrusel 2">
+                <a href="./Catalogo/productos_basicos.html">
+                    <div class="info">
+                        <h2>Conviértase en un maestro de la carpintería</h2>
+                        <p>¿Ama la carpintería? Necesita nuestras herramientas manuales. Tenemos de todo y para todos. Visite nuestro catálogo online o contacte con nosotros. Consiga las herramientas que le harán un carpintero experto.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="slide">
+                <img src="Imagenes/carrusel/car3.jpg" alt="Carrusel 3">
+                <a href="./Catalogo/productos_manuales.html">
+                    <div class="info">
+                        <h2>Trabaje la madera como un profesional</h2>
+                        <p>Máquinas de carpintería de calidad al mejor precio. Corte, cepille, taladre, lije, barnice y ensamble con las mejores marcas. Asesoría, servicio técnico y garantía incluidos. Visite nuestro catálogo digital y trabaje la madera como un profesional.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="slide">
+                <img src="Imagenes/carrusel/car5.jpg" alt="Carrusel 4">
+                <a href="./Catalogo/productos_inalambricos.html">
+                    <div class="info">
+                        <h2>Inalámbricas: la revolución en madera hoy</h2>
+                        <p>Sea más productivo y trabaje la madera sin cables ni límites con las máquinas inalámbricas de carpintería que le ofrecemos. Son ligeras, potentes y seguras. Tenemos las mejores marcas y precios. Venga y compruébelo.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="slide">
+                <img src="Imagenes/carrusel/car2.jpg" alt="Carrusel 5">
+                <a href="./login.html">
+                    <div class="info">
+                        <h2>Está a pocos pasos de disfrutar de cosas extraordinarias</h2>
+                        <p>Regístrese en nuestra página y descubra un mundo de posibilidades. Obtenga beneficios exclusivos: <b>ofertas</b>, <b>servicios de paquetería</b> y <b>entregas inmediatas</b>. ¿Qué espera? ¡Regístrese ya!
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="navigation">
+                <div class="btn active"></div>
+                <div class="btn"></div>
+                <div class="btn"></div>
+                <div class="btn"></div>
+                <div class="btn"></div>
+            </div>
+        </div>
+        <script>
+            var slides = document.querySelectorAll('.slide');
+            var btns = document.querySelectorAll('.btn');
+            let currentSlide = 1;
+
+            //Navegación manual
+            var manualNav = function(manual){
+                slides.forEach((slide) => {
+                    slide.classList.remove('active');
+
+                    btns.forEach((btn) => {
+                        btn.classList.remove('active');
+                    })
+                });
+                slides[manual].classList.add('active');
+                btns[manual].classList.add('active');
+            }
+
+            btns.forEach((btn, i) => {
+                btn.addEventListener('click', ()=> {
+                    manualNav(i);
+                    currentSlide = i;
+                });
+            });
+
+            //Navegación automática
+            var repeat = function(activeClass){
+                let active = document.getElementsByClassName('active');
+                let i = 1;
+
+                var repeater = () => {
+                    setTimeout(function(){
+                        [...active].forEach((activeSlide) => {
+                            activeSlide.classList.remove('active');
+                        });
+                        
+                        slides[i].classList.add('active');
+                        btns[i].classList.add('active');
+                        i++;
+
+                        if(slides.length == i){
+                            i = 0;
+                        }
+                        if(i >= slides.length){
+                            return;
+                        }
+                        repeater();
+                    }, 6000);
+                }
+                repeater();
+            }
+            repeat();
+        </script>
+        
+        <section class="container about">
+            <h2 class="subtitle">¡BIENVENIDO!</h2>
+            <p class="about_paragraph">En CARPINTERO MODERNO®, nos preocupamos por usted y su satisfacción; por eso, contamos con una amplia variedad de productos de la mejor 
+				calidad y al mejor precio. Ademas, al registrarse e iniciar sesion puede disfrutar de los siguientes beneficios:
+            </p>
+
+            <div class="about_main">
+                <article class="about_icons">
+                    <img src="./Imagenes/SVG/paquete.svg" alt="Icono paquete" class="about_icon">
+                    <h3 class="about_title">SERVICIO DE PAQUETERIA</h3>
+                    <p class="about_paragraph">Envíos a todo el país los 365 días del año, garantizando seguridad y rapidez en todos sus pedidos.
+                    </p>
+                </article>
+
+                <article class="about_icons">
+                    <img src="./Imagenes/SVG/timer.svg" alt="Icono timer" class="about_icon">
+                    <h3 class="about_title">ENTREGAS INMEDIATAS</h3>
+                    <p class="about_paragraph">Ahorre tiempo con nuestros envíos en menos de 48 horas para que termine sus proyectos lo antes posible.
+                    </p>
+                </article>
+
+                <article class="about_icons">
+                    <img src="./Imagenes/SVG/oferta.svg" alt="Icono paquete" class="about_icon">
+                    <h3 class="about_title">OFERTAS EXCLUSIVAS</h3>
+                    <p class="about_paragraph">Obtenga hasta un 5% de descuento en todos los productos de nuestro catálogo.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="catalogo contenedor">
+            <h2>PRODUCTOS DESTACADOS</h2>
+            <div class="botones-productos">
+                <button class="todos">Todos</button>
+                <button class="maquinas">Máquinas</button>
+                <button class="inalambricos">Inalámbricos</button>
+                <button class="manuales">Manuales</button>
+            </div>
+
+            <div class="productos" id="lista-productos">
+                <!-- Máquinas -->
+                <div class="row center-xs" data-producto="maquina">
+                    <div class="col-xs-10 col-sm-6 col-md-4 product">
+                        <div class="card">
+                            <img src="./Imagenes\C1_Basicos\Lijadora-Orb_Milwaukee 6034.jpg" alt="Lijadora Milwaukee">
+                            <h3>LIJADORA ORBITAL 5" MILWAUKEE. 3 AMP 120V</h3>
+                            <p class="precio">$ <span id="number1">2200.00</span></p>
+                            <a href="#" class="accion_btn agregar" data-id="1">Agregar al carrito</a>
+                            <h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+                            <ul class="submenu_2">
+                                <li>
+                                    <p>Lijadora orbital cuenta con una superficie de agarre, un interruptor de encendido/apagado, un indicador de velocidad ajustable, disco de raspado con capacidad de 7,000-12,000 revoluciones por minuto, una caja antipolvo con filtro, un adaptador universal de manguera y funcional para una resistencia de 120v. La máquina ofrece diversos tipos de lijado, puede ser para superficies ásperas, eliminando rápidamente pintura u óxido, proporcionando un pulido medio para imperfecciones menores o un limado fino para antes de la coloración, la imprimación o el sellado. <br> Incluye toda la herramienta, partes necesarias, un instructivo ilustrado que permite un fácil ensamblaje a mano para lograr una correcta funcionalidad de la lijadora y un práctico maletín para guardarla junto a sus accesorios.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row center-xs" data-producto="maquina">
+                    <div class="col-xs-10 col-sm-6 col-md-4 product">
+                        <div class="card">
+                            <img src="./Imagenes\C1_Basicos\Sierra_Caladora_Dewalt-660.jpg" alt="Sierra caladora">
+                            <h3>SIERRA CALADORA DEWALT DE 600W 5.5amp</h3>
+                            <p class="precio">$ <span id="number2">2000.00</span></p>
+                            <a href="#" class="accion_btn agregar" data-id="4">Agregar al carrito</a>
+                            <h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+                            <ul class="submenu_2">
+                                <li>
+                                    <p>Sierra Caladora Dewalt compacta de velocidad variable de 0 a 3,100 carreras por minuto, con movimiento orbital, es ideal para trabajos pesados, cuenta con un motor de 5.5 amperes y 600 watts. Su caja de engranajes es muy duradera porque está forjada completamente de metal, cuenta con movimiento orbital de 4 posiciones y zapata biselada de 0 a 45 grados que permiten realizar cortes rectos o curvos en diferentes tipos de materiales, se puede cerrar la hoja caladora sin necesidad de utilizar llave. Con su diseño compacto y liviano permite realizar manualmente cortes con alta precisión.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row center-xs" data-producto="maquina">
+                    <div class="col-xs-10 col-sm-6 col-md-4 product">
+                        <div class="card">
+                            <img src="./Imagenes\C1_Basicos\Rotomartillo_Makita-HR2475.jpg" alt="Rotomartillo">
+                            <h3>ROTOMARTILLO SDS-PLUS 800W 26MM MAKITA HR2631FT</h3>
+                            <p class="precio">$ <span id="number3">1200.00</span></p>
+                            <a href="#" class="accion_btn agregar" data-id="3">Agregar al carrito</a>
+                            <h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+                            <ul class="submenu_2">
+                                <li>
+                                    <p>Rotomartillo Makita, ayuda a realizar trabajos de perforación de manera rápida con 85% de golpes más duros y con reducción de la vibración a solo 10.6 m/s2. Su motor tiene 8 amperes de potencia, brinda una velocidad de 1,500 revoluciones por minuto, 5,500 pulsaciones por minuto y 3.6 pies/libra de energía de impacto. Cuenta con 3 modos de funcionamiento: taladro, martillo rotatorio y cincel. Está elaborado en plástico y metal para hacerlo durable. Su cable tiene un largo de 250 cm (8 pies). El empaque incluye varilla de profundidad, mango lateral y estuche para transportarlo.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inalámbricos -->
+                <div class="row center-xs" data-producto="inalambrico">
+                    <div class="col-xs-10 col-sm-6 col-md-4 product">
+                        <div class="card">
+                            <img src="./Imagenes\C2_Inalambricos\Clavadora Inalambrica 18V Metabo.jpg" alt="Clavadora inalambrica">
+                            <h3>Clavadora Inalambrica 18V Metabo</h3>
+                            <p class="precio">$ <span id="number4">5200.00</span></p>
+                            <a href="#" class="accion_btn agregar" data-id="11">Agregar al carrito</a>
+                            <h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+                            <ul class="submenu_2">
+                                <li><p>Motor sin escobillas para un mayor tiempo de funcionamiento, menos mantenimiento y mayor durabilidad.
+                                    Funciona con una batería de iones de litio compacta de 3 Ah que es más corta de 1,9 cm y un peso más ligero que una batería convencional de 3 Ah para una portabilidad completa.
+                                    Sin complicadas mangueras de aire y compresor ahorra tiempo en la configuración, durante las aplicaciones y en el lugar de trabajo limpio.
+                                    Sistema de resorte de aire único (similar a Metabo HPT línea neumática) que utiliza aire comprimido para conducir cada uña lo que resulta en un tiempo cero de rampa.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row center-xs" data-producto="inalambrico">
+                    <div class="col-xs-10 col-sm-6 col-md-4 product">
+                        <div class="card">
+                            <img src="./Imagenes\C2_Inalambricos\Rotomartillo Taladro Percutor Inalambrico Dewalt.jpg" alt="Rotomartillo">
+                            <h3>Rotomartillo Taladro Percutor Inalambrico Dewalt 20v</h3>
+                            <p class="precio">$ <span id="number5">3500.00</span></p>
+                            <a href="#" class="accion_btn agregar" data-id="13">Agregar al carrito</a>
+                            <h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+                            <ul class="submenu_2">
+                                <li><p>Es el taladro rotomartillo mas fuerte del mercado. Cuenta con un siseño compacto y liviano se adapta a espacios reducidos.
+                                    Incluye 2 baterias. 
+                                    Transmisión de alta velocidad ofrece 2 velocidades (0-600 y 0-2.000 rpm) para una amplia gama de aplicaciones de fijación y perforación
+                                    Mango ergonómico ofrece comodidad y control
+                                    Chuck rapido de 1 / 2 "de trinquete mandril con plaquitas de metal duro ofrece una resistencia poco agarre superior
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row center-xs" data-producto="inalambrico">
+                    <div class="col-xs-10 col-sm-6 col-md-4 product">
+                        <div class="card">
+                            <img src="./Imagenes\C2_Inalambricos\Taladro atornillador inalambrico Bosch GSR-180-LI.jpg" alt="Atornillador">
+                            <h3>Taladro Atornillador Inalambrico Bosch GSR-180</h3>
+                            <p class="precio">$ <span id="number6">3150.00</span></p>
+                            <a href="#" class="accion_btn agregar" data-id="15">Agregar al carrito</a>
+                            <h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+                            <ul class="submenu_2">
+                                <li><p>El GSR-180 Professional de Bosch es el atornillador a batería más ligero en la categoría de 18v de Bosch. Su peso permite un manejo óptimo y un equilibrio perfecto entre comodidad y potencia. Este atornillador a batería es más potente y robusto, cuenta con caja de engranajes de 2 velocidades que ofrece un rendimiento profesional con un torque de 21/54 nm para atornillar lo que necesites, una capacidad mín./máx. de sujeción del portabrocas de 1.5 / 13 mm, sistema auto lock para el rápido cambio de accesorios y luz led para iluminar el área de trabajo. Además tiene velocidad variable y protección electrónica de las celdas de la batería para una vida más duradera.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manuales -->
+                <div class="row center-xs" data-producto="manual">
+                    <div class="col-xs-10 col-sm-6 col-md-4 product">
+                        <div class="card">
+                            <img src="./Imagenes/C3_Manuales/Escuadra-rapida.jpg" alt="Cepillo #6">
+                            <h3>Escuadra rápida de aluminio de 7" Empire</h3>
+                            <p class="precio">$ <span id="number7">870.00</span></p>
+                            <a href="#" class="accion_btn agregar" data-id="16">Agregar al carrito</a>
+                            <h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+                            <ul class="submenu_2">
+                                <li><p>Escuadra de aluminio de 18cm (7") Empire, permite hacer trabajos de construcción o mantenimiento en carpintería u otros oficios. Su borde es grueso y puede usarse como guía de sierra. Tiene forma triangular y uno de sus ángulos es de 90 grados. Su estructura cuenta con tablas de conversión estampadas visibles para hacer mediciones en cm y grados. Su color plata le brinda visibilidad. Elaborada en aluminio que la hace ligera, duradera, resistente a la flexión, rotura y corrosión. Sus dimensiones son 18 x 18 x 2 cm.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row center-xs" data-producto="manual">
+                    <div class="col-xs-10 col-sm-6 col-md-4 product">
+                        <div class="card">
+                            <img src="./Imagenes/C3_Manuales/Prensa-resorte.jpg" alt="Prensa de resorte">
+                            <h3>Prensa de resorte de 4" Truper</h3>
+                            <p class="precio">$ <span id="number8">200.00</span></p>
+                            <a href="#" class="accion_btn agregar" data-id="19">Agregar al carrito</a>
+                            <h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+                            <ul class="submenu_2">
+                                <li><p>Prensa de Resorte de 4" Truper, diseñada con mangos antiderrapantes y mordazas móviles auto ajustables de polipropileno que le da mayor resistencia para aplicar presión uniforme. Está fabricada en nylon y cuenta con cómodas agarraderas elaboradas en TPR que proporcionan un mejor agarre al momento de usarla, evitando desplazamientos. Cuenta con un perno metálico que incrementa su vida útil. El resorte de acero de alta tensión le brinda gran resistencia, ideal para carpintería por su rápida acción y gran capacidad de presión.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row center-xs" data-producto="manual">
+                    <div class="col-xs-10 col-sm-6 col-md-4 product">
+                        <div class="card">
+                            <img class="inal_3" src="./Imagenes/C3_Manuales/Cepillo.jpg" alt="Escuadra rápida">
+                            <h3>Cepillo #6 de hierro Truper</h3>
+                            <p class="precio">$ <span id="number9">1100.00</span></p>
+                            <a href="#" class="accion_btn agregar" data-id="17">Agregar al carrito</a>
+                            <h4 class="mas">MÁS<span><i class="icono fa fa-chevron-down" aria-hidden="true"></i></span></h4>
+                            <ul class="submenu_2">
+                                <li><p>Cepillo para carpintero Truper, permite realizar trabajos de nivelado y rectificación sobre superficies de madera. Está elaborado con un cuerpo de hierro nodular, manijas de madera, así como cuchilla de acero mejorado que le da 3 veces más durabilidad. Su diseño es ligero para utilizarlo sin fatigarse, sus dimensiones son 34.6 x 13.5 x 5 cm. El empaque incluye una navaja adicional e instructivo de uso.
+                                </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <h1>CATÁLOGO DE PRODUCTOS</h1>
+        <div class="row center-xs">
+            <div class="product_index">
+                <div class="card item">
+                    <img src="Imagenes/p-maquinas-2.jpg" alt="Cepillo #6">
+                    <h3><a href="Catalogo/productos_basicos.html">MÁQUINAS</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="row center-xs">
+            <div class="product_index">
+                <div class="card item">
+                    <img src="Imagenes/p-inalambricos.jpg" alt="Escuadra rápida">
+                    <h3><a href="Catalogo/productos_inalambricos.html">INALAMBRICOS</a></h3>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row center-xs">
+            <div class="product_index">
+                <div class="card item">
+                    <img src="Imagenes/p-manuales.jpg" alt="Juego de tres formones">
+                    <h3><a href="Catalogo/productos_manuales.html">HERRAMIENTAS MANUALES</a></h3>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <footer class="pie_pagina">
+        <div class="grupo1">
+            <div class="box">
+                <figure><a href="index.html"><img src="Imagenes/230310_SitioCM_LogoLetras.png"
+                            alt="Logo de Carpintero Moderno"></a></figure>
+            </div>
+            <div class="box b_posicion">
+                <h2>SUCURSALES</h2>
+                <p>Central Norte No. 1845 Esq. Libramiento Norte, La Llave, 29037 Tuxtla Gutiérrez, Chiapas</p><br>
+                <p>Avenida Quinta Norte Poniente 1615, 29000 Tuxtla Gutiérrez, Chiapas</p>
+            </div>
+            <div class="box b_posicion">
+                <h2>PRODUCTOS</h2>
+                <ul>
+                    <li><a href="Catalogo/productos_basicos.html">Máquinas</a></li>
+                    <li><a href="Catalogo/productos_inalambricos.html">Inalámbricos</a></li>
+                    <li><a href="Catalogo/productos_manuales.html">Manuales</a></li>
+                    <li><a href="Catalogo/ofertas.html">Ofertas</a></li>
+                </ul>
+            </div>
+            <div class="box">
+                <h2>ACERCA DE</h2>
+                <ul>
+                    <li><a href="home.html">Nosotros</a></li>
+                    <li><a href="historia.html">Historia</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="grupo2">
+            <small>&copy; 2023 <b>Carpintero Moderno</b> - Todos los Derechos Reservados.</small>
+        </div>
+    </footer>
+
+    <script src="./JS/carrito.js"></script>
+    <script src="./JS/pedido.js"></script>
+    <script src="./JS/productos.js"></script>
+    <script>
+        let listElements = document.querySelectorAll('.mas');
+        listElements.forEach(listElement => {
+            listElement.addEventListener('click', () => {
+                listElement.classList.toggle('ver');
+
+                let height = 0;
+                let menu = listElement.nextElementSibling;
+                if (menu.clientHeight == "0") {
+                    height = menu.scrollHeight;
+                }
+                menu.style.height = height + "px";
+
+            })
+        });
+    </script>
+
+</body>
+</html>
